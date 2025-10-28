@@ -19,10 +19,7 @@
     <!-- <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet"> -->
     <!-- Paperozi 폰트는 CSS 파일에서 @font-face로 로드됩니다 -->
     
-    <!-- 카카오톡 SDK -->
-    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.4.0/kakao.min.js"
-            integrity="sha384-mXVrIX2T/Kszp6Z0aEWaA8Nm7J6/ZeWXbL8UpGRjKwWe56Srd/uxxyQK6cNIdHg2"
-            crossorigin="anonymous"></script>
+    <script src="assets/js/capture-utils.js"></script>
 </head>
 <body class="teto-theme">
     <!-- 네비게이션 -->
@@ -205,9 +202,9 @@
 
                     <!-- 공유 버튼들 -->
                     <div class="share-buttons">
-                        <button class="share-btn share-kakao" onclick="shareTetoKakao()">
-                            <i class="fas fa-comment"></i>
-                            <span>카카오톡</span>
+                        <button class="share-btn share-capture" onclick="captureResult()">
+                            <i class="fas fa-camera"></i>
+                            <span>결과 캡처</span>
                         </button>
                         <button class="share-btn share-copy" onclick="copyTetoResult()">
                             <i class="fas fa-copy"></i>
@@ -296,12 +293,20 @@
         });
     </script>
     
+    <!-- 환경 설정 로드 -->
+    <script src="assets/js/config.local.js"></script>
+    <script src="assets/js/config.js"></script>
+    
     <script>
-        // Kakao SDK 초기화
+        // Kakao SDK 초기화 (보안적으로 관리되는 API 키 사용)
         if (typeof Kakao !== 'undefined' && !Kakao.isInitialized()) {
-            // 실제 카카오 앱 키 - 테스트용 공개 키
-            Kakao.init('2c0e2e605aea85abe0c3311b06583571');
-            console.log('Kakao SDK 초기화 완료:', Kakao.isInitialized());
+            const kakaoApiKey = window.appConfig.getApiKey('kakao');
+            if (kakaoApiKey) {
+                Kakao.init(kakaoApiKey);
+                console.log('Kakao SDK 초기화 완료:', Kakao.isInitialized());
+            } else {
+                console.error('카카오 API 키가 설정되지 않았습니다.');
+            }
         }
 
         // 페이지 로드 시 초기화

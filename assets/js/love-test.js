@@ -13,6 +13,26 @@ class LoveTest {
 
     // 테스트 시작
     startTest() {
+        console.log('연애 스타일 테스트 시작');
+        
+        // 필요한 데이터가 로드되었는지 확인
+        if (typeof loveQuestions === 'undefined' || !loveQuestions.length) {
+            console.error('loveQuestions가 로드되지 않았습니다.');
+            alert('테스트 데이터를 불러오는 중입니다. 잠시 후 다시 시도해주세요.');
+            return;
+        }
+        
+        if (typeof loveTypes === 'undefined') {
+            console.error('loveTypes가 로드되지 않았습니다.');
+            alert('테스트 데이터를 불러오는 중입니다. 잠시 후 다시 시도해주세요.');
+            return;
+        }
+        
+        console.log('데이터 확인 완료:', {
+            questionsCount: loveQuestions.length,
+            typesCount: Object.keys(loveTypes).length
+        });
+        
         this.resetTest();
         this.showSection('test-section');
         this.displayQuestion();
@@ -20,9 +40,11 @@ class LoveTest {
 
     // 테스트 초기화
     resetTest() {
+        console.log('테스트 초기화');
         this.currentQuestion = 0;
         this.answers = [];
         this.scores = { R: 0, P: 0, A: 0, C: 0, I: 0, D: 0, E: 0, L: 0 };
+        console.log('초기화된 점수:', this.scores);
     }
 
     // 섹션 표시/숨김
@@ -81,6 +103,12 @@ class LoveTest {
         const question = loveQuestions[this.currentQuestion];
         const selectedOption = question.options[optionIndex];
         
+        console.log('답변 선택:', {
+            questionId: question.id,
+            optionIndex: optionIndex,
+            selectedOption: selectedOption
+        });
+        
         // 답변 저장
         this.answers.push({
             questionId: question.id,
@@ -88,8 +116,19 @@ class LoveTest {
             optionIndex: optionIndex
         });
 
-        // 점수 계산
-        this.scores[selectedOption.type] += selectedOption.score;
+        // 점수 계산 (안전하게)
+        if (selectedOption && selectedOption.type && typeof selectedOption.score === 'number') {
+            if (this.scores.hasOwnProperty(selectedOption.type)) {
+                this.scores[selectedOption.type] += selectedOption.score;
+                console.log('점수 업데이트:', selectedOption.type, '+', selectedOption.score, '=', this.scores[selectedOption.type]);
+            } else {
+                console.error('유효하지 않은 점수 타입:', selectedOption.type);
+            }
+        } else {
+            console.error('유효하지 않은 선택 옵션:', selectedOption);
+        }
+
+        console.log('현재 총 점수:', this.scores);
 
         // 선택 효과 표시
         this.showAnswerSelection(optionIndex);
@@ -122,61 +161,151 @@ class LoveTest {
 
     // 결과 계산
     calculateResult() {
+        console.log('결과 계산 시작');
+        console.log('현재 점수:', this.scores);
+        console.log('답변 개수:', this.answers.length);
+        
         this.showLoading();
 
         setTimeout(() => {
-            const loveType = this.determineLoveType();
-            const loveStyle = loveTypes[loveType];
-            
-            this.displayResult(loveType, loveStyle);
-            this.hideLoading();
-            this.showSection('result-section');
+            try {
+                // loveTypes가 로드되었는지 확인
+                if (typeof loveTypes === 'undefined') {
+                    console.error('loveTypes가 정의되지 않았습니다.');
+                    throw new Error('loveTypes 데이터가 로드되지 않았습니다.');
+                }
+                
+                console.log('사용 가능한 loveTypes:', Object.keys(loveTypes));
+                
+                const loveType = this.determineLoveType();
+                console.log('계산된 연애 유형:', loveType);
+                
+                const loveStyle = loveTypes[loveType];
+                if (!loveStyle) {
+                    console.error('연애 유형 데이터를 찾을 수 없습니다:', loveType);
+                    console.error('사용 가능한 유형들:', Object.keys(loveTypes));
+                    throw new Error(`연애 유형 "${loveType}" 데이터가 존재하지 않습니다.`);
+                }
+                
+                console.log('연애 스타일 데이터:', loveStyle);
+                
+                this.displayResult(loveType, loveStyle);
+                this.hideLoading();
+                this.showSection('result-section');
+                
+                console.log('결과 계산 및 표시 완료');
+            } catch (error) {
+                console.error('결과 계산 중 상세 오류:', error);
+                console.error('오류 스택:', error.stack);
+                this.hideLoading();
+                
+                // 오류 발생 시 기본 결과 표시
+                const resultSection = document.getElementById('result-section');
+                if (resultSection) {
+                    resultSection.innerHTML = `
+                        <div class="result-container" style="text-align: center; padding: 40px;">
+                            <h2>결과 계산 중 오류가 발생했습니다</h2>
+                            <p>오류 내용: ${error.message}</p>
+                            <p>잠시 후 다시 시도해주세요.</p>
+                            <button onclick="restartTest()" class="restart-btn" style="margin-top: 20px;">
+                                <i class="fas fa-redo"></i> 다시 테스트하기
+                            </button>
+                            <button onclick="location.reload()" class="restart-btn" style="margin-top: 10px;">
+                                <i class="fas fa-refresh"></i> 페이지 새로고침
+                            </button>
+                        </div>
+                    `;
+                    this.showSection('result-section');
+                }
+            }
         }, 2000);
     }
 
     // 연애 유형 결정
     determineLoveType() {
+        console.log('유형 결정 시작, 현재 점수:', this.scores);
+        
         let type = '';
         
         // R vs P (로맨틱 vs 현실적)
-        type += this.scores.R >= this.scores.P ? 'R' : 'P';
+        const rp = this.scores.R >= this.scores.P ? 'R' : 'P';
+        type += rp;
+        console.log('R vs P:', this.scores.R, 'vs', this.scores.P, '=', rp);
         
         // A vs C (적극적 vs 소극적)
-        type += this.scores.A >= this.scores.C ? 'A' : 'C';
+        const ac = this.scores.A >= this.scores.C ? 'A' : 'C';
+        type += ac;
+        console.log('A vs C:', this.scores.A, 'vs', this.scores.C, '=', ac);
         
         // I vs D (독립적 vs 의존적)
-        type += this.scores.I >= this.scores.D ? 'I' : 'D';
+        const id = this.scores.I >= this.scores.D ? 'I' : 'D';
+        type += id;
+        console.log('I vs D:', this.scores.I, 'vs', this.scores.D, '=', id);
         
         // E vs L (감정적 vs 논리적)
-        type += this.scores.E >= this.scores.L ? 'E' : 'L';
+        const el = this.scores.E >= this.scores.L ? 'E' : 'L';
+        type += el;
+        console.log('E vs L:', this.scores.E, 'vs', this.scores.L, '=', el);
         
+        console.log('최종 유형:', type);
         return type;
     }
 
     // 결과 표시
     displayResult(loveType, loveStyle) {
-        // 기본 결과 정보
-        document.getElementById('result-type-code').textContent = loveType;
-        document.getElementById('result-type').textContent = loveStyle.name;
-        document.getElementById('result-description').textContent = loveStyle.description;
+        console.log('결과 표시 시작:', { loveType, loveStyle });
         
-        // 결과 아이콘
-        document.getElementById('result-icon').innerHTML = `<i class="${loveStyle.icon}"></i>`;
-        
-        // 연애 성향 점수 표시
-        this.displayLoveStats();
-        
-        // 이상형 분석
-        this.displayIdealType(loveStyle);
-        
-        // 연애 조언
-        this.displayLoveAdvice(loveStyle);
-        
-        // 궁합 좋은 유형들
-        this.displayCompatibleTypes(loveType);
-        
-        // 결과 저장
-        this.saveResult(loveType, loveStyle);
+        try {
+            // 기본 결과 정보
+            const typeCodeElement = document.getElementById('result-type-code');
+            const typeElement = document.getElementById('result-type');
+            const descriptionElement = document.getElementById('result-description');
+            const iconElement = document.getElementById('result-icon');
+
+            if (typeCodeElement) typeCodeElement.textContent = loveType;
+            if (typeElement) typeElement.textContent = loveStyle.name;
+            if (descriptionElement) descriptionElement.textContent = loveStyle.description;
+            if (iconElement) iconElement.innerHTML = `<i class="${loveStyle.icon}"></i>`;
+
+            // 연애 성향 점수 표시
+            this.displayLoveStats();
+            
+            // 유형 설명 표시 (새로 추가)
+            this.displayTypeExplanation(loveType);
+            
+            // 이상형 분석
+            this.displayIdealType(loveStyle);
+            
+            // 연애 조언
+            this.displayLoveAdvice(loveStyle);
+            
+            // 궁합 좋은 유형들
+            this.displayCompatibleTypes(loveType);
+            
+            // 결과 저장
+            this.saveResult(loveType, loveStyle);
+            
+            console.log('결과 표시 완료');
+        } catch (error) {
+            console.error('결과 표시 중 오류:', error);
+            // 오류 발생 시 기본 메시지 표시
+            const resultSection = document.getElementById('result-section');
+            if (resultSection) {
+                resultSection.innerHTML = `
+                    <div class="result-container">
+                        <div class="result-main">
+                            <div class="result-card">
+                                <h2>결과를 불러오는 중 오류가 발생했습니다</h2>
+                                <p>페이지를 새로고침하고 다시 시도해주세요.</p>
+                                <button onclick="location.reload()" class="restart-btn">
+                                    <i class="fas fa-redo"></i> 새로고침
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
     }
 
     // 연애 성향 점수 표시
@@ -210,6 +339,63 @@ class LoveTest {
         const total = this.scores[type1] + this.scores[type2];
         if (total === 0) return 50;
         return Math.round((this.scores[type1] / total) * 100);
+    }
+
+    // 유형 설명 표시 (새로 추가)
+    displayTypeExplanation(loveType) {
+        // 유형 설명 섹션이 없다면 생성
+        let explanationSection = document.querySelector('.type-explanation');
+        if (!explanationSection) {
+            explanationSection = document.createElement('div');
+            explanationSection.className = 'type-explanation';
+            explanationSection.innerHTML = `
+                <h3><i class="fas fa-info-circle"></i> 내 유형 코드 해석</h3>
+                <div class="type-breakdown" id="type-breakdown"></div>
+            `;
+            
+            // 결과 카드 다음에 삽입
+            const resultMain = document.querySelector('.result-main');
+            if (resultMain) {
+                resultMain.appendChild(explanationSection);
+            }
+        }
+
+        const breakdownContainer = document.getElementById('type-breakdown');
+        if (!breakdownContainer) return;
+
+        // 각 알파벳의 의미 정의
+        const typeExplanations = {
+            'R': { full: '로맨틱', desc: '감정과 낭만을 중시하는 성향', icon: 'fas fa-heart', color: '#FF69B4' },
+            'P': { full: '현실적', desc: '실용성과 현실을 중시하는 성향', icon: 'fas fa-calculator', color: '#20B2AA' },
+            'A': { full: '적극적', desc: '주도적이고 능동적인 성향', icon: 'fas fa-bolt', color: '#FF6347' },
+            'C': { full: '신중한', desc: '조심스럽고 신중한 성향', icon: 'fas fa-shield-alt', color: '#32CD32' },
+            'I': { full: '독립적', desc: '자유롭고 독립적인 성향', icon: 'fas fa-user-tie', color: '#4169E1' },
+            'D': { full: '의존적', desc: '함께하고 의지하고 싶은 성향', icon: 'fas fa-users', color: '#FF1493' },
+            'E': { full: '감정적', desc: '감정과 직감을 중시하는 성향', icon: 'fas fa-smile-beam', color: '#FFD700' },
+            'L': { full: '논리적', desc: '이성과 논리를 중시하는 성향', icon: 'fas fa-brain', color: '#9370DB' }
+        };
+
+        // 유형 코드를 개별 문자로 분해하여 설명 생성
+        const breakdown = loveType.split('').map((char, index) => {
+            const explanation = typeExplanations[char];
+            const dimensions = ['연애 스타일', '행동 성향', '관계 스타일', '의사결정'];
+            
+            return `
+                <div class="type-item">
+                    <div class="type-letter" style="background-color: ${explanation.color}20; border-color: ${explanation.color};">
+                        <i class="${explanation.icon}" style="color: ${explanation.color};"></i>
+                        <span class="letter">${char}</span>
+                    </div>
+                    <div class="type-detail">
+                        <h4>${explanation.full}</h4>
+                        <p class="dimension">${dimensions[index]}</p>
+                        <p class="description">${explanation.desc}</p>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        breakdownContainer.innerHTML = breakdown;
     }
 
     // 이상형 분석 표시

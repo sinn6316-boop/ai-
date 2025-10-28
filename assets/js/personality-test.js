@@ -13,13 +13,41 @@ class PersonalityTest {
 
     // 테스트 시작
     startTest() {
-        console.log('PersonalityTest.startTest() 호출됨');
+        console.log('=== PersonalityTest.startTest() 시작 ===');
+        
+        // 안전한 데이터 확인
+        const questions = window.personalityQuestions || personalityQuestions;
+        console.log('데이터 확인 - personalityQuestions:', typeof questions !== 'undefined' ? `존재함 (${questions.length}개)` : '없음');
+        
+        if (!questions || questions.length === 0) {
+            console.error('personalityQuestions 데이터가 없습니다');
+            alert('테스트 데이터를 로드할 수 없습니다. 페이지를 새로고침해주세요.');
+            return;
+        }
+        
         this.resetTest();
         console.log('테스트 초기화 완료');
+        
+        // DOM 요소 확인
+        const testSection = document.getElementById('test-section');
+        const introSection = document.getElementById('test-intro');
+        
+        console.log('DOM 요소 확인:');
+        console.log('- test-section:', testSection ? '존재함' : '없음');
+        console.log('- test-intro:', introSection ? '존재함' : '없음');
+        
+        if (!testSection) {
+            console.error('test-section 요소를 찾을 수 없습니다');
+            alert('테스트 화면을 로드할 수 없습니다. 페이지 구조를 확인해주세요.');
+            return;
+        }
+        
         this.showSection('test-section');
-        console.log('test-section으로 화면 전환');
+        console.log('test-section으로 화면 전환 완료');
+        
         this.displayQuestion();
-        console.log('첫 번째 질문 표시');
+        console.log('첫 번째 질문 표시 완료');
+        console.log('=== startTest() 완료 ===');
     }
 
     // 테스트 초기화
@@ -52,16 +80,25 @@ class PersonalityTest {
     // 질문 표시
     displayQuestion() {
         console.log('displayQuestion 호출됨, currentQuestion:', this.currentQuestion);
-        console.log('personalityQuestions 배열:', personalityQuestions ? '존재함' : '없음');
-        console.log('personalityQuestions 길이:', personalityQuestions ? personalityQuestions.length : '알 수 없음');
         
-        if (this.currentQuestion >= personalityQuestions.length) {
+        // 안전한 데이터 접근
+        const questions = window.personalityQuestions || personalityQuestions;
+        console.log('personalityQuestions 배열:', questions ? '존재함' : '없음');
+        console.log('personalityQuestions 길이:', questions ? questions.length : '알 수 없음');
+        
+        if (!questions || questions.length === 0) {
+            console.error('질문 데이터가 없습니다');
+            alert('질문 데이터를 로드할 수 없습니다.');
+            return;
+        }
+        
+        if (this.currentQuestion >= questions.length) {
             console.log('모든 질문 완료, 결과 계산 시작');
             this.calculateResult();
             return;
         }
 
-        const question = personalityQuestions[this.currentQuestion];
+        const question = questions[this.currentQuestion];
         console.log('현재 질문:', question);
         
         // 진행바 업데이트
@@ -388,15 +425,7 @@ function showCompatibility() {
     alert('궁합 테스트 기능은 곧 출시됩니다!');
 }
 
-// 페이지 로드시 이전 결과 확인
+// 페이지 로드시 이전 결과 확인 (제한 없이 항상 테스트 가능)
 document.addEventListener('DOMContentLoaded', function() {
-    const lastResult = localStorage.getItem('personalityTestResult');
-    const lastTestDate = localStorage.getItem('lastTestDate');
-    const today = new Date().toDateString();
-    
-    // 오늘 이미 테스트를 했다면 결과 표시 옵션 제공
-    if (lastResult && lastTestDate === today) {
-        const result = JSON.parse(lastResult);
-        console.log('오늘 이미 테스트를 완료했습니다:', result.type);
-    }
+    console.log('성격유형 테스트 페이지가 로드되었습니다.');
 });

@@ -2005,3 +2005,155 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+/* 유형 설명 스타일 (새로 추가) */
+.type-explanation {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 20px;
+    padding: 30px;
+    margin: 30px 0;
+    color: white;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+}
+
+.type-explanation h3 {
+    color: white;
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.type-explanation h3 i {
+    margin-right: 10px;
+    color: #FFD700;
+}
+
+.type-breakdown {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.type-item {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.type-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.type-letter {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+    border: 3px solid;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.type-letter i {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.type-letter .letter {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+}
+
+.type-detail h4 {
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.type-detail .dimension {
+    color: #FFD700;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.type-detail .description {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+    .type-breakdown {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+    }
+    
+    .type-explanation {
+        padding: 20px;
+        margin: 20px 0;
+    }
+    
+    .type-item {
+        padding: 15px;
+    }
+    
+    .type-letter {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .type-letter i {
+        font-size: 1rem;
+    }
+    
+    .type-letter .letter {
+        font-size: 1.2rem;
+    }
+}
+
+/* 캡처 버튼 스타일 */
+.share-capture {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    border: none !important;
+    color: white !important;
+    transition: all 0.3s ease;
+}
+
+.share-capture:hover {
+    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.share-capture i {
+    color: white !important;
+}
+
+/* 기존 카카오톡 버튼 스타일을 캡처 버튼에 적용 */
+.share-btn.share-capture {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    color: white;
+}
+
+.share-btn.share-capture:hover {
+    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}

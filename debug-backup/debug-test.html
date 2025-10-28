@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>테스트 디버깅</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .debug-info {
+            background: #f5f5f5;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .error {
+            background: #ffe6e6;
+            color: #d00;
+        }
+        .success {
+            background: #e6ffe6;
+            color: #060;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background: #007bff;
+            color: white;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>테스트 기능 디버깅</h1>
+    
+    <div class="debug-info">
+        <h3>현재 상태:</h3>
+        <div id="status">로딩 중...</div>
+    </div>
+    
+    <div>
+        <button onclick="testPersonality()">성격 테스트 시작</button>
+        <button onclick="testLove()">연애 테스트 시작</button>
+        <button onclick="checkClasses()">클래스 상태 확인</button>
+        <button onclick="checkData()">데이터 상태 확인</button>
+    </div>
+    
+    <div class="debug-info">
+        <h3>로그:</h3>
+        <div id="log"></div>
+    </div>
+
+    <!-- 필요한 스크립트들 로드 -->
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/personality-test.js"></script>
+    <script src="assets/js/love-test.js"></script>
+    <script src="assets/js/config.js"></script>
+    
+    <script>
+        let logDiv = document.getElementById('log');
+        let statusDiv = document.getElementById('status');
+        
+        function log(message, type = 'info') {
+            const time = new Date().toLocaleTimeString();
+            const className = type === 'error' ? 'error' : type === 'success' ? 'success' : '';
+            logDiv.innerHTML += `<div class="${className}">[${time}] ${message}</div>`;
+            console.log(message);
+        }
+        
+        function updateStatus() {
+            let status = [];
+            
+            // 클래스 확인
+            status.push(`PersonalityTest: ${typeof PersonalityTest !== 'undefined' ? '✓' : '✗'}`);
+            status.push(`LoveTest: ${typeof LoveTest !== 'undefined' ? '✓' : '✗'}`);
+            
+            // 데이터 확인
+            status.push(`personalityQuestions: ${typeof personalityQuestions !== 'undefined' ? `✓ (${personalityQuestions.length}개)` : '✗'}`);
+            status.push(`loveQuestions: ${typeof loveQuestions !== 'undefined' ? `✓ (${loveQuestions.length}개)` : '✗'}`);
+            
+            // 인스턴스 확인
+            status.push(`personalityTestInstance: ${window.personalityTestInstance ? '✓' : '✗'}`);
+            status.push(`loveTestInstance: ${window.loveTestInstance ? '✓' : '✗'}`);
+            
+            statusDiv.innerHTML = status.join('<br>');
+        }
+        
+        function testPersonality() {
+            log('성격 테스트 시작 시도...');
+            try {
+                if (typeof PersonalityTest === 'undefined') {
+                    throw new Error('PersonalityTest 클래스가 로드되지 않았습니다');
+                }
+                
+                if (!window.personalityTestInstance) {
+                    window.personalityTestInstance = new PersonalityTest();
+                    log('PersonalityTest 인스턴스 생성 완료', 'success');
+                }
+                
+                // 가짜 DOM 요소 생성 (테스트용)
+                if (!document.getElementById('test-section')) {
+                    const testSection = document.createElement('div');
+                    testSection.id = 'test-section';
+                    testSection.style.display = 'none';
+                    document.body.appendChild(testSection);
+                    log('test-section 요소 생성', 'success');
+                }
+                
+                window.personalityTestInstance.startTest();
+                log('성격 테스트 시작 성공!', 'success');
+                
+            } catch (error) {
+                log(`성격 테스트 시작 실패: ${error.message}`, 'error');
+            }
+            updateStatus();
+        }
+        
+        function testLove() {
+            log('연애 테스트 시작 시도...');
+            try {
+                if (typeof LoveTest === 'undefined') {
+                    throw new Error('LoveTest 클래스가 로드되지 않았습니다');
+                }
+                
+                if (!window.loveTestInstance) {
+                    window.loveTestInstance = new LoveTest();
+                    log('LoveTest 인스턴스 생성 완료', 'success');
+                }
+                
+                // 가짜 DOM 요소 생성 (테스트용)
+                if (!document.getElementById('test-section')) {
+                    const testSection = document.createElement('div');
+                    testSection.id = 'test-section';
+                    testSection.style.display = 'none';
+                    document.body.appendChild(testSection);
+                    log('test-section 요소 생성', 'success');
+                }
+                
+                window.loveTestInstance.startTest();
+                log('연애 테스트 시작 성공!', 'success');
+                
+            } catch (error) {
+                log(`연애 테스트 시작 실패: ${error.message}`, 'error');
+            }
+            updateStatus();
+        }
+        
+        function checkClasses() {
+            log('클래스 상태 확인 중...');
+            log(`PersonalityTest 클래스: ${typeof PersonalityTest !== 'undefined' ? '로드됨' : '로드되지 않음'}`);
+            log(`LoveTest 클래스: ${typeof LoveTest !== 'undefined' ? '로드됨' : '로드되지 않음'}`);
+            updateStatus();
+        }
+        
+        function checkData() {
+            log('데이터 상태 확인 중...');
+            log(`personalityQuestions: ${typeof personalityQuestions !== 'undefined' ? `로드됨 (${personalityQuestions.length}개 질문)` : '로드되지 않음'}`);
+            log(`loveQuestions: ${typeof loveQuestions !== 'undefined' ? `로드됨 (${loveQuestions.length}개 질문)` : '로드되지 않음'}`);
+            updateStatus();
+        }
+        
+        // 페이지 로드 완료 후 초기 상태 확인
+        document.addEventListener('DOMContentLoaded', function() {
+            log('페이지 로드 완료');
+            updateStatus();
+            
+            // 2초 후 다시 확인 (스크립트 로딩 완료 대기)
+            setTimeout(() => {
+                log('지연 로딩 후 재확인');
+                updateStatus();
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

@@ -356,19 +356,40 @@ class StressTest {
         container.innerHTML = '';
         
         if (stressResult.copingStrategies && stressResult.copingStrategies.length > 0) {
-            stressResult.copingStrategies.forEach(strategy => {
+            stressResult.copingStrategies.forEach((strategy, index) => {
                 const strategyElement = document.createElement('div');
                 strategyElement.className = 'relief-item';
+                // 카드에 약간의 지연 애니메이션 추가
+                strategyElement.style.animationDelay = `${index * 0.1}s`;
                 strategyElement.innerHTML = `
                     <div class="relief-content">
-                        <i class="fas fa-lightbulb"></i>
+                        <i class="fas fa-heart"></i>
                         <span>${strategy}</span>
                     </div>
                 `;
                 container.appendChild(strategyElement);
             });
         } else {
-            container.innerHTML = '<p>스트레스 해소법 정보를 불러올 수 없습니다.</p>';
+            // 기본 스트레스 해소법 제공
+            const defaultStrategies = [
+                "깊은 호흡을 통한 마음 안정",
+                "규칙적인 운동으로 스트레스 해소",
+                "충분한 수면으로 몸과 마음 회복",
+                "취미 활동으로 긍정적 에너지 충전"
+            ];
+            
+            defaultStrategies.forEach((strategy, index) => {
+                const strategyElement = document.createElement('div');
+                strategyElement.className = 'relief-item';
+                strategyElement.style.animationDelay = `${index * 0.1}s`;
+                strategyElement.innerHTML = `
+                    <div class="relief-content">
+                        <i class="fas fa-heart"></i>
+                        <span>${strategy}</span>
+                    </div>
+                `;
+                container.appendChild(strategyElement);
+            });
         }
         
         console.log('대처 방법 표시 완료');
@@ -386,19 +407,42 @@ class StressTest {
         container.innerHTML = '';
         
         if (stressResult.recommendations && stressResult.recommendations.length > 0) {
-            stressResult.recommendations.forEach(recommendation => {
+            stressResult.recommendations.forEach((recommendation, index) => {
                 const recElement = document.createElement('div');
                 recElement.className = 'tip-item';
+                // 카드에 약간의 지연 애니메이션 추가
+                recElement.style.animationDelay = `${index * 0.1}s`;
                 recElement.innerHTML = `
                     <div class="tip-content">
-                        <i class="fas fa-star"></i>
+                        <i class="fas fa-lightbulb"></i>
                         <span>${recommendation}</span>
                     </div>
                 `;
                 container.appendChild(recElement);
             });
         } else {
-            container.innerHTML = '<p>추천 활동 정보를 불러올 수 없습니다.</p>';
+            // 기본 생활 개선 팁 제공
+            const defaultTips = [
+                "하루 30분 이상 햇볕 쬐기",
+                "수분 섭취량 늘리기 (하루 8잔)",
+                "디지털 기기 사용 시간 줄이기",
+                "긍정적인 사람들과 시간 보내기",
+                "감사 일기 작성하기",
+                "정기적인 스트레칭으로 몸 풀기"
+            ];
+            
+            defaultTips.forEach((tip, index) => {
+                const recElement = document.createElement('div');
+                recElement.className = 'tip-item';
+                recElement.style.animationDelay = `${index * 0.1}s`;
+                recElement.innerHTML = `
+                    <div class="tip-content">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>${tip}</span>
+                    </div>
+                `;
+                container.appendChild(recElement);
+            });
         }
         
         console.log('추천 활동 표시 완료');

@@ -50,6 +50,249 @@
     color: #F27F3D !important;
 }
 
+/* 스트레스 결과 섹션 카드 스타일 */
+.stress-relief, .lifestyle-tips {
+    margin: 30px 0;
+}
+
+.stress-relief h3, .lifestyle-tips h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #333;
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.stress-relief h3 i {
+    color: #e74c3c;
+    font-size: 1.2rem;
+}
+
+.lifestyle-tips h3 i {
+    color: #f39c12;
+    font-size: 1.2rem;
+}
+
+/* 스트레스 해소법 카드 그리드 */
+.relief-methods {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.relief-item {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+    border-radius: 12px;
+    padding: 20px;
+    color: white;
+    box-shadow: 0 4px 15px rgba(238, 90, 36, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.relief-item:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.relief-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(238, 90, 36, 0.4);
+}
+
+.relief-item:hover:before {
+    opacity: 1;
+}
+
+.relief-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    position: relative;
+    z-index: 1;
+}
+
+.relief-content i {
+    font-size: 1.4rem;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+.relief-content span {
+    font-size: 15px;
+    line-height: 1.5;
+    font-weight: 500;
+}
+
+/* 생활 개선 팁 카드 그리드 */
+.tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.tip-item {
+    background: linear-gradient(135deg, #74b9ff, #0984e3);
+    border-radius: 12px;
+    padding: 20px;
+    color: white;
+    box-shadow: 0 4px 15px rgba(9, 132, 227, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.tip-item:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.tip-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(9, 132, 227, 0.4);
+}
+
+.tip-item:hover:before {
+    opacity: 1;
+}
+
+.tip-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    position: relative;
+    z-index: 1;
+}
+
+.tip-content i {
+    font-size: 1.4rem;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+.tip-content span {
+    font-size: 15px;
+    line-height: 1.5;
+    font-weight: 500;
+}
+
+/* 주의사항 카드 스타일 개선 */
+.stress-warning {
+    margin: 30px 0;
+}
+
+.stress-warning h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #333;
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.stress-warning h3 i {
+    color: #e74c3c;
+    font-size: 1.2rem;
+}
+
+.warning-card {
+    background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+    border-radius: 12px;
+    padding: 20px;
+    border-left: 5px solid #e17055;
+    box-shadow: 0 4px 15px rgba(225, 112, 85, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.warning-card:before {
+    content: '⚠️';
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 2rem;
+    opacity: 0.3;
+}
+
+.warning-card p {
+    margin: 0;
+    color: #333;
+    font-size: 15px;
+    line-height: 1.6;
+    font-weight: 500;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+    .relief-methods, .tips-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .relief-item, .tip-item {
+        padding: 16px;
+    }
+    
+    .relief-content, .tip-content {
+        gap: 12px;
+    }
+    
+    .relief-content span, .tip-content span {
+        font-size: 14px;
+    }
+    
+    .warning-card {
+        padding: 16px;
+    }
+    
+    .warning-card p {
+        font-size: 14px;
+    }
+}
+
+/* 카드 등장 애니메이션 */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.relief-item, .tip-item {
+    animation: fadeInUp 0.5s ease forwards;
+    opacity: 0;
+}
+
+.warning-card {
+    animation: fadeInUp 0.5s ease forwards;
+    animation-delay: 0.2s;
+    opacity: 0;
+}
+
 /* 스트레스 테스트 페이지 전용 답변 컨테이너 */
 .stress-page .answers-container {
     gap: 8px !important;

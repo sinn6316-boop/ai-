@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔧 버튼 클릭 테스트</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-primary { background: #007bff; color: white; }
+        .btn-success { background: #28a745; color: white; }
+        .btn-warning { background: #ffc107; color: black; }
+        .btn-danger { background: #dc3545; color: white; }
+        button:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .log {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+            max-height: 300px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        .log div { margin: 5px 0; }
+        .success { color: #28a745; }
+        .error { color: #dc3545; }
+        .warning { color: #ffc107; }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🔧 테스트 버튼 클릭 진단</h1>
+        <p>아래 버튼들을 순서대로 클릭해서 어디서 문제가 발생하는지 확인해보세요.</p>
+        
+        <button class="btn-primary" onclick="test1()">1️⃣ 기본 버튼 클릭 테스트</button>
+        <button class="btn-success" onclick="test2()">2️⃣ 간단한 함수 호출 테스트</button>
+        <button class="btn-warning" onclick="test3()">3️⃣ 스크립트 로딩 확인 테스트</button>
+        <button class="btn-danger" onclick="startPersonalityTest()">4️⃣ 실제 성격 테스트 시작</button>
+        
+        <div class="log" id="log">
+            <div>🟢 테스트 페이지 로드 완료</div>
+            <div>📋 로그가 여기에 표시됩니다...</div>
+        </div>
+        
+        <button class="btn-primary" onclick="clearLog()">🗑️ 로그 지우기</button>
+    </div>
+    
+    <!-- 기본 스크립트들을 올바른 순서로 로드 -->
+    <script src="assets/js/data.js"></script>
+    <script>
+        // data.js 로드 확인 및 전역 변수 강제 할당
+        console.log('data.js 로드 후 personalityQuestions:', typeof personalityQuestions !== 'undefined' ? '있음' : '없음');
+        
+        // 전역 window 객체에 명시적으로 할당
+        if (typeof personalityQuestions !== 'undefined') {
+            window.personalityQuestions = personalityQuestions;
+            console.log('✅ personalityQuestions를 window 객체에 할당 완료');
+        } else {
+            console.error('❌ personalityQuestions 변수를 찾을 수 없음');
+        }
+    </script>
+    
+    <script src="assets/js/personality-test.js"></script>
+    <script>
+        // personality-test.js 로드 확인 및 전역 클래스 강제 할당
+        console.log('personality-test.js 로드 후 PersonalityTest:', typeof PersonalityTest !== 'undefined' ? '있음' : '없음');
+        
+        // 전역 window 객체에 명시적으로 할당
+        if (typeof PersonalityTest !== 'undefined') {
+            window.PersonalityTest = PersonalityTest;
+            console.log('✅ PersonalityTest를 window 객체에 할당 완료');
+        } else {
+            console.error('❌ PersonalityTest 클래스를 찾을 수 없음');
+        }
+    </script>
+    
+    <script src="assets/js/test-utils.js"></script>
+    <script>
+        // test-utils.js 로드 확인
+        console.log('test-utils.js 로드 후 startPersonalityTest:', typeof startPersonalityTest !== 'undefined' ? '있음' : '없음');
+        
+        // 최종 확인
+        setTimeout(() => {
+            console.log('=== 최종 전역 변수 확인 ===');
+            console.log('window.personalityQuestions:', typeof window.personalityQuestions !== 'undefined' ? '✅ 있음' : '❌ 없음');
+            console.log('window.PersonalityTest:', typeof window.PersonalityTest !== 'undefined' ? '✅ 있음' : '❌ 없음');
+            console.log('window.startPersonalityTest:', typeof window.startPersonalityTest !== 'undefined' ? '✅ 있음' : '❌ 없음');
+        }, 100);
+    </script>
+    
+    <script>
+        const logDiv = document.getElementById('log');
+        
+        function addLog(message, type = 'info') {
+            const time = new Date().toLocaleTimeString();
+            const color = type === 'success' ? 'success' : type === 'error' ? 'error' : type === 'warning' ? 'warning' : '';
+            const icon = type === 'success' ? '✅' : type === 'error' ? '❌' : type === 'warning' ? '⚠️' : 'ℹ️';
+            
+            const div = document.createElement('div');
+            div.className = color;
+            div.innerHTML = `[${time}] ${icon} ${message}`;
+            
+            logDiv.appendChild(div);
+            logDiv.scrollTop = logDiv.scrollHeight;
+            
+            console.log(`[${time}] ${message}`);
+        }
+        
+        function test1() {
+            addLog('기본 버튼 클릭 감지됨!', 'success');
+            addLog('onclick 이벤트가 정상적으로 작동합니다.', 'success');
+        }
+        
+        function test2() {
+            addLog('간단한 함수 호출 테스트 시작', 'info');
+            
+            try {
+                // 간단한 계산
+                const result = 2 + 2;
+                addLog(`계산 결과: ${result}`, 'success');
+                
+                // DOM 조작
+                const button = document.querySelector('.btn-success');
+                button.style.background = '#20c997';
+                addLog('DOM 조작 성공', 'success');
+                
+                setTimeout(() => {
+                    button.style.background = '#28a745';
+                    addLog('비동기 작업 성공', 'success');
+                }, 1000);
+                
+            } catch (error) {
+                addLog(`함수 실행 오류: ${error.message}`, 'error');
+            }
+        }
+        
+        function test3() {
+            addLog('스크립트 로딩 상태 확인 중...', 'info');
+            
+            // 데이터 확인 (window 객체에서 직접)
+            const hasPersonalityQuestions = typeof window.personalityQuestions !== 'undefined';
+            addLog(`personalityQuestions: ${hasPersonalityQuestions ? '✅ 로드됨' : '❌ 없음'}`, hasPersonalityQuestions ? 'success' : 'error');
+            
+            if (hasPersonalityQuestions) {
+                addLog(`질문 개수: ${window.personalityQuestions.length}개`, 'info');
+            }
+            
+            // 클래스 확인 (window 객체에서 직접)
+            const hasPersonalityTest = typeof window.PersonalityTest !== 'undefined';
+            addLog(`PersonalityTest 클래스: ${hasPersonalityTest ? '✅ 로드됨' : '❌ 없음'}`, hasPersonalityTest ? 'success' : 'error');
+            
+            // 테스트 유틸리티 확인
+            const hasStartFunction = typeof window.startPersonalityTest !== 'undefined';
+            addLog(`startPersonalityTest 함수: ${hasStartFunction ? '✅ 정의됨' : '❌ 없음'}`, hasStartFunction ? 'success' : 'error');
+            
+            // 전역 변수 확인 (window 객체 직접 확인)
+            addLog('전역 변수 목록 (window 객체):', 'info');
+            ['PersonalityTest', 'personalityQuestions', 'startPersonalityTest'].forEach(name => {
+                const exists = typeof window[name] !== 'undefined';
+                addLog(`  window.${name}: ${exists ? '있음' : '없음'}`, exists ? 'success' : 'warning');
+            });
+        }
+        
+        function clearLog() {
+            logDiv.innerHTML = '<div>🗑️ 로그가 지워졌습니다.</div>';
+        }
+        
+        // 페이지 로드 완료 후 자동 확인
+        document.addEventListener('DOMContentLoaded', function() {
+            addLog('DOM 로드 완료', 'success');
+            
+            setTimeout(() => {
+                addLog('지연 로딩 후 상태 확인', 'info');
+                test3();
+            }, 2000);
+        });
+        
+        // 오류 캐치
+        window.addEventListener('error', function(e) {
+            addLog(`JavaScript 오류 감지: ${e.message}`, 'error');
+            addLog(`파일: ${e.filename}:${e.lineno}`, 'error');
+        });
+    </script>
+</body>
+</html>

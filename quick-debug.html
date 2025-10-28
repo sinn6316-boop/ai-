@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>성격 테스트 진단</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        button { padding: 10px 20px; margin: 10px; border: none; border-radius: 5px; cursor: pointer; }
+        .btn-test { background: #007bff; color: white; }
+        .btn-check { background: #28a745; color: white; }
+        .log { background: #f8f9fa; padding: 15px; margin: 10px 0; border-radius: 5px; height: 300px; overflow-y: auto; }
+    </style>
+</head>
+<body>
+    <h1>🔧 성격 테스트 진단 도구</h1>
+    
+    <button class="btn-check" onclick="checkData()">1️⃣ 데이터 확인</button>
+    <button class="btn-check" onclick="checkClasses()">2️⃣ 클래스 확인</button>
+    <button class="btn-test" onclick="testDirectStart()">3️⃣ 직접 테스트 시작</button>
+    <button class="btn-test" onclick="startPersonalityTest()">4️⃣ 유틸리티로 테스트 시작</button>
+    
+    <div class="log" id="log"></div>
+    
+    <!-- 실제 성격 테스트에서 사용하는 것과 동일한 스크립트 -->
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/personality-test.js"></script>
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/test-utils.js"></script>
+    
+    <!-- 전역 변수 안전 할당 -->
+    <script>
+        if (typeof personalityQuestions !== 'undefined') {
+            window.personalityQuestions = personalityQuestions;
+        }
+        if (typeof PersonalityTest !== 'undefined') {
+            window.PersonalityTest = PersonalityTest;
+        }
+    </script>
+    
+    <!-- 가짜 DOM 요소들 -->
+    <div id="test-intro" style="display: none;">테스트 소개 섹션</div>
+    <div id="test-section" style="display: none;">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill"></div>
+            <span class="progress-text" id="progress-text">1/20</span>
+        </div>
+        <div class="question-container">
+            <div class="question-header">
+                <i id="question-icon" class="fas fa-question"></i>
+                <h2 id="question-text">테스트 질문이 여기에 표시됩니다</h2>
+            </div>
+            <div class="answers-container" id="answers-container">
+                <!-- 답변 옵션들이 여기에 표시됩니다 -->
+            </div>
+        </div>
+    </div>
+    <div id="result-section" style="display: none;">결과 섹션</div>
+    
+    <script>
+        const logDiv = document.getElementById('log');
+        
+        function log(message) {
+            const time = new Date().toLocaleTimeString();
+            logDiv.innerHTML += `<div>[${time}] ${message}</div>`;
+            logDiv.scrollTop = logDiv.scrollHeight;
+            console.log(`[${time}] ${message}`);
+        }
+        
+        function checkData() {
+            log('=== 데이터 확인 시작 ===');
+            
+            // personalityQuestions 확인
+            const globalQuestions = typeof personalityQuestions !== 'undefined';
+            const windowQuestions = typeof window.personalityQuestions !== 'undefined';
+            
+            log(`personalityQuestions (전역): ${globalQuestions ? '✅ 있음' : '❌ 없음'}`);
+            log(`window.personalityQuestions: ${windowQuestions ? '✅ 있음' : '❌ 없음'}`);
+            
+            if (globalQuestions) {
+                log(`질문 개수 (전역): ${personalityQuestions.length}개`);
+                log(`첫 번째 질문: ${personalityQuestions[0].question}`);
+            }
+            
+            if (windowQuestions) {
+                log(`질문 개수 (window): ${window.personalityQuestions.length}개`);
+            }
+        }
+        
+        function checkClasses() {
+            log('=== 클래스 확인 시작 ===');
+            
+            const globalClass = typeof PersonalityTest !== 'undefined';
+            const windowClass = typeof window.PersonalityTest !== 'undefined';
+            
+            log(`PersonalityTest (전역): ${globalClass ? '✅ 있음' : '❌ 없음'}`);
+            log(`window.PersonalityTest: ${windowClass ? '✅ 있음' : '❌ 없음'}`);
+            
+            // 인스턴스 생성 테스트
+            try {
+                const TestClass = window.PersonalityTest || PersonalityTest;
+                const instance = new TestClass();
+                log('✅ PersonalityTest 인스턴스 생성 성공');
+                log(`startTest 메서드: ${typeof instance.startTest === 'function' ? '✅ 있음' : '❌ 없음'}`);
+            } catch (error) {
+                log(`❌ 인스턴스 생성 실패: ${error.message}`);
+            }
+        }
+        
+        function testDirectStart() {
+            log('=== 직접 테스트 시작 ===');
+            
+            try {
+                const TestClass = window.PersonalityTest || PersonalityTest;
+                const instance = new TestClass();
+                
+                log('인스턴스 생성 완료, startTest 호출...');
+                instance.startTest();
+                log('✅ startTest 호출 완료');
+                
+            } catch (error) {
+                log(`❌ 직접 테스트 시작 실패: ${error.message}`);
+                console.error('상세 오류:', error);
+            }
+        }
+        
+        // 페이지 로드 완료 후 자동 확인
+        document.addEventListener('DOMContentLoaded', function() {
+            log('🟢 페이지 로드 완료');
+            setTimeout(() => {
+                checkData();
+                checkClasses();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
