@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧠 AI 심리분석 테스트 - 나를 알아보자!</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/navigation.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#FF6B9D">
+    <meta property="og:title" content="🧠 AI 심리분석 테스트 - 나를 알아보자!">
+    <meta property="og:description" content="✨ 20가지 질문으로 알아보는 나만의 특별한 성격! 2만명이 참여한 인기 심리테스트 💕">
+    <meta property="og:image" content="assets/images/og-image.jpg">
+</head>
+<body>
+    <!-- 홈 화면 -->
+    <div id="home-screen" class="screen active">
+        <!-- 네비게이션 영역 -->
+        <div class="floating-nav">
+            <button id="nav-toggle" class="nav-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div id="nav-menu" class="nav-menu">
+                <a href="#" class="nav-item active" data-screen="home">
+                    <i class="fas fa-home"></i>
+                    <span>홈</span>
+                </a>
+                <a href="personality.html" class="nav-item">
+                    <i class="fas fa-user"></i>
+                    <span>성격 유형</span>
+                </a>
+                <a href="love.html" class="nav-item">
+                    <i class="fas fa-heart"></i>
+                    <span>연애 스타일</span>
+                </a>
+                <a href="career.html" class="nav-item">
+                    <i class="fas fa-briefcase"></i>
+                    <span>직업 적성</span>
+                </a>
+                <a href="stress.html" class="nav-item">
+                    <i class="fas fa-spa"></i>
+                    <span>스트레스 진단</span>
+                </a>
+                <a href="leadership.html" class="nav-item">
+                    <i class="fas fa-crown"></i>
+                    <span>리더십 유형</span>
+                </a>
+                <a href="teto-test.html" class="nav-item">
+                    <i class="fas fa-balance-scale"></i>
+                    <span>테토 유형</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- 히어로 섹션 -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <div class="hero-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h1 class="hero-title">AI 심리분석 테스트</h1>
+                <p class="hero-subtitle">✨ 너의 진짜 성격을 찾아보자! ✨</p>
+                <p class="hero-description">
+                    20개의 질문으로 알아보는<br>
+                    <span class="highlight">나만의 특별한 성격 유형</span>
+                </p>
+                
+                <div class="test-info">
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <span>약 3-5분 소요</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-users"></i>
+                        <span>16가지 성격 유형</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-star"></i>
+                        <span>맞춤형 조언 제공</span>
+                    </div>
+                </div>
+
+                <a href="personality.html" class="start-test-btn">
+                    <i class="fas fa-play"></i>
+                    테스트 시작하기
+                </a>
+
+                <div class="daily-bonus">
+                    <i class="fas fa-gift"></i>
+                    <span>오늘의 특별 분석! 추가 인사이트 제공 중 🎁</span>
+                </div>
+
+                <div class="social-proof">
+                    <div class="participant-count">
+                        <i class="fas fa-users"></i>
+                        <span>지금까지 <strong>47,382명</strong>이 참여했어요!</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 테스트 옵션들 -->
+        <section class="test-options">
+            <div class="container">
+                <h2 class="section-title">🌟 인기 심리테스트 모음</h2>
+                <p class="section-subtitle">다양한 심리 테스트로 나 자신을 더 깊이 알아보세요</p>
+                
+                <div class="tests-grid">
+                    <div class="test-item" onclick="location.href='personality.html'">
+                        <i class="fas fa-user"></i>
+                        <h4>🧠 성격 유형 분석</h4>
+                        <p>16가지 MBTI 유형으로 나의 진짜 성격 찾기</p>
+                        <div class="test-meta">
+                            <span>👥 5.2만명 참여</span>
+                            <span>⏱️ 3-5분</span>
+                        </div>
+                    </div>
+
+                    <div class="test-item" onclick="location.href='love.html'">
+                        <i class="fas fa-heart"></i>
+                        <h4>💕 연애 스타일</h4>
+                        <p>나의 로맨틱한 연애 성향과 이상형 분석</p>
+                        <div class="test-meta">
+                            <span>👥 2.1만명 참여</span>
+                            <span>⏱️ 2-3분</span>
+                        </div>
+                    </div>
+
+                    <div class="test-item" onclick="location.href='career.html'">
+                        <i class="fas fa-briefcase"></i>
+                        <h4>💼 직업 적성</h4>
+                        <p>나에게 맞는 직업과 진로 방향 찾기</p>
+                        <div class="test-meta">
+                            <span>👥 1.8만명 참여</span>
+                            <span>⏱️ 3-4분</span>
+                        </div>
+                    </div>
+
+                    <div class="test-item" onclick="location.href='stress.html'">
+                        <i class="fas fa-spa"></i>
+                        <h4>🧘‍♀️ 스트레스 진단</h4>
+                        <p>현재 스트레스 수준과 관리 방법 제안</p>
+                        <div class="test-meta">
+                            <span>👥 1.5만명 참여</span>
+                            <span>⏱️ 2-3분</span>
+                        </div>
+                    </div>
+
+                    <div class="test-item" onclick="location.href='leadership.html'">
+                        <i class="fas fa-crown"></i>
+                        <h4>👑 리더십 유형</h4>
+                        <p>나만의 리더십 스타일과 발전 방향</p>
+                        <div class="test-meta">
+                            <span>👥 1.2만명 참여</span>
+                            <span>⏱️ 3-4분</span>
+                        </div>
+                    </div>
+
+                    <div class="test-item" onclick="location.href='teto-test.html'">
+                        <i class="fas fa-balance-scale"></i>
+                        <h4>⚖️ 테토 유형 분석</h4>
+                        <p>테토남 vs 테토녀? 나의 진짜 성향 찾기</p>
+                        <div class="test-meta">
+                            <span>👥 신규 테스트</span>
+                            <span>⏱️ 2-3분</span>
+                        </div>
+                    </div>
+
+                    <div class="test-item special">
+                        <i class="fas fa-sparkles"></i>
+                        <h4>✨ 종합 분석</h4>
+                        <p>모든 테스트 결과를 종합한 완전한 나의 모습</p>
+                        <div class="test-meta">
+                            <span>👥 곧 출시</span>
+                            <span>⏱️ 10-15분</span>
+                        </div>
+                        <div class="coming-soon">
+                            Coming Soon
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 푸터 -->
+        <footer class="footer">
+            <div class="container">
+                <p>💝 Made with Love by 신서아 | 2025 AI 심리분석 테스트</p>
+                <div class="footer-links">
+                    <a href="#about">소개</a>
+                    <a href="#privacy">개인정보처리방침</a>
+                    <a href="#contact">문의</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/navigation.js"></script>
+</body>
+</html>

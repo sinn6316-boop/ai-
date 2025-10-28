@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>성격 유형 테스트 - AI 심리분석</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/poomang-style.css">
+        <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/new-style.css">
+    <link rel="stylesheet" href="assets/css/new-navigation.css">
+    
+    <!-- 아이콘 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- 폰트 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="personality-theme">
+    <!-- 네비게이션 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <!-- 로고 -->
+            <div class="nav-logo">
+                <a href="index.html">
+                    <i class="fas fa-brain"></i>
+                    <span>AI 심리분석</span>
+                </a>
+            </div>
+
+            <!-- 메뉴 토글 버튼 (모바일) -->
+            <button class="nav-toggle" type="button">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+
+            <!-- 네비게이션 메뉴 -->
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>홈</span>
+                </a>
+                <a href="personality.html" class="nav-link active">
+                    <i class="fas fa-user"></i>
+                    <span>성격 유형</span>
+                </a>
+                <a href="love.html" class="nav-link">
+                    <i class="fas fa-heart"></i>
+                    <span>연애 스타일</span>
+                </a>
+                <a href="career.html" class="nav-link">
+                    <i class="fas fa-briefcase"></i>
+                    <span>직업 적성</span>
+                </a>
+                <a href="stress.html" class="nav-link">
+                    <i class="fas fa-spa"></i>
+                    <span>스트레스 진단</span>
+                </a>
+                <a href="leadership.html" class="nav-link">
+                    <i class="fas fa-crown"></i>
+                    <span>리더십 유형</span>
+                </a>
+            </div>
+
+            <!-- 모바일 드롭다운 메뉴 -->
+            <div class="nav-dropdown">
+                <a href="index.html" class="nav-dropdown-item">
+                    <i class="fas fa-home"></i>
+                    <span>홈</span>
+                </a>
+                <a href="personality.html" class="nav-dropdown-item active">
+                    <i class="fas fa-user"></i>
+                    <span>성격 유형</span>
+                </a>
+                <a href="love.html" class="nav-dropdown-item">
+                    <i class="fas fa-heart"></i>
+                    <span>연애 스타일</span>
+                </a>
+                <a href="career.html" class="nav-dropdown-item">
+                    <i class="fas fa-briefcase"></i>
+                    <span>직업 적성</span>
+                </a>
+                <a href="stress.html" class="nav-dropdown-item">
+                    <i class="fas fa-spa"></i>
+                    <span>스트레스 진단</span>
+                </a>
+                <a href="leadership.html" class="nav-dropdown-item">
+                    <i class="fas fa-crown"></i>
+                    <span>리더십 유형</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 메인 콘텐츠 -->
+    <main class="main-content">
+        <!-- 테스트 인트로 섹션 -->
+        <section id="test-intro" class="test-intro">
+            <div class="container">
+                <div class="intro-content">
+                    <div class="intro-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h1 class="intro-title">성격 유형 테스트</h1>
+                    <p class="intro-subtitle">나는 어떤 사람일까? MBTI 기반 심리분석</p>
+                    <p class="intro-description">
+                        20개의 심리학적 상황 질문을 통해 당신의 진짜 성격을 분석합니다.<br>
+                        내향/외향, 직관/감각, 사고/감정, 판단/인식의 4가지 차원에서<br>
+                        당신만의 고유한 성격 유형을 발견해보세요.
+                    </p>
+                    
+                    <div class="test-info">
+                        <div class="info-item">
+                            <i class="fas fa-clock"></i>
+                            <span>소요시간: 3-5분</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-question-circle"></i>
+                            <span>문항수: 20개</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-users"></i>
+                            <span>5.2만명 참여</span>
+                        </div>
+                    </div>
+
+                    <button class="start-test-btn" onclick="startPersonalityTest()">
+                        <i class="fas fa-play"></i>
+                        <span>테스트 시작하기</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+        <!-- 테스트 진행 섹션 -->
+        <section id="test-section" class="test-section" style="display: none;">
+            <div class="test-container">
+                <!-- 진행바 -->
+                <div class="test-header">
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-fill"></div>
+                        </div>
+                        <span class="progress-text" id="progress-text">1 / 20</span>
+                    </div>
+                    <button class="home-btn" onclick="goHome()">
+                        <i class="fas fa-home"></i>
+                    </button>
+                </div>
+
+                <!-- 질문 영역 -->
+                <div class="question-container">
+                    <div class="question-card" id="question-card">
+                        <div class="question-number" id="question-number">Q1</div>
+                        <h2 class="question-title" id="question-title">질문이 여기에 표시됩니다</h2>
+                        <div class="question-image" id="question-image">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+
+                    <div class="answers-container" id="answers-container">
+                        <!-- 답변 옵션들이 동적으로 생성됩니다 -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 결과 섹션 -->
+        <section id="result-section" class="result-section" style="display: none;">
+            <div class="result-container">
+                <!-- 메인 결과 -->
+                <div class="result-main">
+                    <div class="result-card" id="result-card">
+                        <div class="result-icon" id="result-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h2 class="result-title" id="result-title">당신의 성격 유형</h2>
+                        <div class="result-mbti" id="result-mbti">INFJ</div>
+                        <h3 class="result-type" id="result-type">분석형 사고자</h3>
+                        <p class="result-description" id="result-description">
+                            결과 설명이 여기에 표시됩니다.
+                        </p>
+                        
+                        <div class="result-stats" id="result-stats">
+                            <!-- 성격 특성별 점수가 동적으로 생성됩니다 -->
+                        </div>
+                    </div>
+
+                    <!-- 공유 버튼들 -->
+                    <div class="share-buttons">
+                        <button class="share-btn share-kakao" onclick="shareKakao()">
+                            <i class="fas fa-comment"></i>
+                            <span>카카오톡</span>
+                        </button>
+                        <button class="share-btn share-copy" onclick="copyResult()">
+                            <i class="fas fa-copy"></i>
+                            <span>링크복사</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 오늘의 조언 -->
+                <div class="today-advice">
+                    <h3><i class="fas fa-lightbulb"></i> 오늘의 하루 조언</h3>
+                    <div class="advice-card" id="advice-card">
+                        <p id="daily-advice">오늘은 새로운 도전을 해보세요. 당신의 분석력이 빛을 발할 거예요!</p>
+                    </div>
+                </div>
+
+                <!-- 유사한 유형들 -->
+                <div class="similar-types">
+                    <h3><i class="fas fa-users"></i> 비슷한 성격 유형들</h3>
+                    <div class="types-grid" id="similar-types-grid">
+                        <!-- 동적으로 생성 -->
+                    </div>
+                </div>
+
+                <!-- 호환성 체크 -->
+                <div class="compatibility-section">
+                    <h3><i class="fas fa-heart"></i> 나와 잘 맞는 유형은?</h3>
+                    <button class="compatibility-btn" onclick="showCompatibility()">
+                        <span>궁합 테스트 하기</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- 다른 테스트 추천 -->
+                <div class="recommended-tests">
+                    <h3><i class="fas fa-magic"></i> 다른 테스트도 해보세요!</h3>
+                    <div class="tests-grid">
+                        <div class="test-item" onclick="location.href='love.html'">
+                            <i class="fas fa-heart"></i>
+                            <h4>연애 스타일 테스트</h4>
+                            <p>나의 연애 패턴 분석</p>
+                        </div>
+                        <div class="test-item" onclick="location.href='career.html'">
+                            <i class="fas fa-briefcase"></i>
+                            <h4>직업 적성 테스트</h4>
+                            <p>나에게 맞는 직업 찾기</p>
+                        </div>
+                        <div class="test-item" onclick="location.href='stress.html'">
+                            <i class="fas fa-spa"></i>
+                            <h4>스트레스 진단</h4>
+                            <p>스트레스 해소법 제안</p>
+                        </div>
+                        <div class="test-item" onclick="location.href='leadership.html'">
+                            <i class="fas fa-crown"></i>
+                            <h4>리더십 유형</h4>
+                            <p>나의 리더십 스타일</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 다시 테스트하기 -->
+                <div class="restart-section">
+                    <button class="restart-btn" onclick="restartTest()">
+                        <i class="fas fa-redo"></i>
+                        <span>다시 테스트하기</span>
+                    </button>
+                    <button class="home-btn-result" onclick="location.href='index.html'">
+                        <i class="fas fa-home"></i>
+                        <span>홈으로 가기</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 테스트 화면 -->
+    <div id="test-screen" class="screen">
+        <div class="test-container">
+            <div class="test-header">
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                    <span class="progress-text" id="progress-text">1 / 20</span>
+                </div>
+                <button class="home-btn" onclick="goHome()">
+                    <i class="fas fa-home"></i>
+                </button>
+            </div>
+
+            <div class="question-container">
+                <div class="question-card" id="question-card">
+                    <div class="question-number" id="question-number">Q1</div>
+                    <h2 class="question-title" id="question-title">질문이 여기에 표시됩니다</h2>
+                    <div class="question-image" id="question-image">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                </div>
+
+                <div class="answers-container" id="answers-container">
+                    <!-- 답변 옵션들이 동적으로 생성됩니다 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 결과 화면 -->
+    <div id="result-screen" class="screen">
+        <div class="result-container">
+            <!-- 메인 결과 -->
+            <div class="result-main">
+                <div class="result-card" id="result-card">
+                    <div class="result-icon" id="result-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h2 class="result-title" id="result-title">당신의 성격 유형</h2>
+                    <div class="result-mbti" id="result-mbti">INFJ</div>
+                    <h3 class="result-type" id="result-type">분석형 사고자</h3>
+                    <p class="result-description" id="result-description">
+                        결과 설명이 여기에 표시됩니다.
+                    </p>
+                    
+                    <div class="result-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">논리성</span>
+                            <div class="stat-bar">
+                                <div class="stat-fill" style="width: 85%"></div>
+                            </div>
+                            <span class="stat-value">85%</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">감성</span>
+                            <div class="stat-bar">
+                                <div class="stat-fill" style="width: 70%"></div>
+                            </div>
+                            <span class="stat-value">70%</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">사교성</span>
+                            <div class="stat-bar">
+                                <div class="stat-fill" style="width: 60%"></div>
+                            </div>
+                            <span class="stat-value">60%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 공유 버튼들 -->
+                <div class="share-buttons">
+                    <button class="share-btn share-kakao" onclick="shareKakao()">
+                        <i class="fas fa-comment"></i>
+                        <span>카카오톡</span>
+                    </button>
+                    <button class="share-btn share-copy" onclick="copyResult()">
+                        <i class="fas fa-copy"></i>
+                        <span>링크복사</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 오늘의 조언 -->
+            <div class="today-advice">
+                <h3><i class="fas fa-lightbulb"></i> 오늘의 하루 조언</h3>
+                <div class="advice-card" id="advice-card">
+                    <p id="daily-advice">오늘은 새로운 도전을 해보세요. 당신의 분석력이 빛을 발할 거예요!</p>
+                </div>
+            </div>
+
+            <!-- 유사한 유형들 -->
+            <div class="similar-types">
+                <h3><i class="fas fa-users"></i> 비슷한 성격 유형들</h3>
+                <div class="types-grid" id="similar-types-grid">
+                    <!-- 동적으로 생성 -->
+                </div>
+            </div>
+
+            <!-- 호환성 체크 -->
+            <div class="compatibility-section">
+                <h3><i class="fas fa-heart"></i> 나와 잘 맞는 유형은?</h3>
+                <button class="compatibility-btn" onclick="showCompatibility()">
+                    <span>궁합 테스트 하기</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <!-- 다른 테스트 추천 -->
+            <div class="recommended-tests">
+                <h3><i class="fas fa-magic"></i> 다른 테스트도 해보세요!</h3>
+                <div class="tests-grid">
+                    <div class="test-item" onclick="startLoveTest()">
+                        <i class="fas fa-heart"></i>
+                        <h4>연애 스타일 테스트</h4>
+                        <p>나의 연애 패턴 분석</p>
+                    </div>
+                    <div class="test-item" onclick="startCareerTest()">
+                        <i class="fas fa-briefcase"></i>
+                        <h4>직업 적성 테스트</h4>
+                        <p>나에게 맞는 직업 찾기</p>
+                    </div>
+                    <div class="test-item" onclick="startStressTest()">
+                        <i class="fas fa-spa"></i>
+                        <h4>스트레스 진단</h4>
+                        <p>스트레스 해소법 제안</p>
+                    </div>
+                    <div class="test-item" onclick="startLeadershipTest()">
+                        <i class="fas fa-crown"></i>
+                        <h4>리더십 유형</h4>
+                        <p>나의 리더십 스타일</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 다시 테스트하기 -->
+            <div class="restart-section">
+                <button class="restart-btn" id="restart-btn" onclick="restartTest()">
+                    <i class="fas fa-redo"></i>
+                    <span>다시 테스트하기</span>
+                </button>
+                <button class="home-btn-result" id="home-btn-result" onclick="goHome()">
+                    <i class="fas fa-home"></i>
+                    <span>홈으로 가기</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 로딩 화면 -->
+    <div id="loading" class="loading" style="display: none;">
+        <div class="loading-spinner"></div>
+        <p>결과를 분석중...</p>
+    </div>
+
+    <!-- 토스트 메시지 -->
+    <div id="toast" class="toast">
+        <span id="toast-message"></span>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="assets/js/navigation.js"></script>
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/personality-test.js"></script>
+    <script src="assets/js/app.js"></script>
+    
+    <script>
+        // DOM 로드 완료 후 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            const nav = new Navigation();
+            nav.init();
+            
+            // 성격 테스트 초기화
+            if (typeof PersonalityTest !== 'undefined') {
+                window.personalityTestInstance = new PersonalityTest();
+            }
+        });
+    </script>
+</body>
+</html>

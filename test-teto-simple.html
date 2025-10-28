@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>테토 테스트 - 간단 디버그</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .section {
+            background: white;
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        button {
+            background: #FF6B9D;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            border-radius: 25px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        button:hover {
+            background: #ff5088;
+        }
+        .answer-option {
+            padding: 15px;
+            margin: 10px 0;
+            background: #f9f9f9;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .answer-option:hover {
+            background: #e0e0e0;
+        }
+        .answer-option.selected {
+            background: #FF6B9D;
+            color: white;
+        }
+        #debug {
+            background: #fffacd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h1>테토 테스트 - 디버그 페이지</h1>
+    
+    <div id="debug">
+        <h3>디버그 정보</h3>
+        <div id="debug-content">로딩 중...</div>
+    </div>
+
+    <div id="test-intro" class="section">
+        <h2>테토 유형 테스트</h2>
+        <p>시작 버튼을 눌러주세요</p>
+        <button onclick="startTetoTest()">테스트 시작하기</button>
+    </div>
+
+    <div id="test-section" class="section" style="display: none;">
+        <h2>질문 <span id="question-number">1</span></h2>
+        <h3 id="question-title">질문을 로딩 중...</h3>
+        <div class="progress">
+            <div id="progress-fill" style="width: 0%; height: 20px; background: #FF6B9D;"></div>
+        </div>
+        <p id="progress-text">1 / 15</p>
+        <div id="answers-container"></div>
+    </div>
+
+    <div id="result-section" class="section" style="display: none;">
+        <h2>테스트 결과</h2>
+        <div id="result-card">
+            <h3 id="result-type-title">?</h3>
+            <p id="result-type-name">?</p>
+            <p id="result-description">?</p>
+            <div id="result-stats"></div>
+        </div>
+        <button onclick="restartTetoTest()">다시 하기</button>
+    </div>
+
+    <div id="loading" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; color: white;">
+        <div>
+            <h2>분석 중...</h2>
+        </div>
+    </div>
+
+    <script src="teto-data.js"></script>
+    <script src="teto-test.js"></script>
+    
+    <script>
+        // 디버그 정보 업데이트
+        function updateDebug(message) {
+            const debugContent = document.getElementById('debug-content');
+            const timestamp = new Date().toLocaleTimeString();
+            debugContent.innerHTML += `<br>[${timestamp}] ${message}`;
+            console.log(`[${timestamp}] ${message}`);
+        }
+
+        // 페이지 로드 시
+        document.addEventListener('DOMContentLoaded', function() {
+            updateDebug('DOMContentLoaded 이벤트 발생');
+            
+            // 데이터 확인
+            updateDebug(`tetoQuestions: ${typeof tetoQuestions !== 'undefined' ? '존재함 (길이: ' + tetoQuestions.length + ')' : '없음'}`);
+            updateDebug(`tetoResults: ${typeof tetoResults !== 'undefined' ? '존재함' : '없음'}`);
+            updateDebug(`getTetoType 함수: ${typeof getTetoType !== 'undefined' ? '존재함' : '없음'}`);
+            updateDebug(`TetoTest 클래스: ${typeof TetoTest !== 'undefined' ? '존재함' : '없음'}`);
+            
+            // 테스트 인스턴스 생성
+            if (typeof TetoTest !== 'undefined') {
+                window.tetoTestInstance = new TetoTest();
+                updateDebug('TetoTest 인스턴스 생성 완료');
+            } else {
+                updateDebug('ERROR: TetoTest 클래스를 찾을 수 없습니다!');
+            }
+            
+            // 버튼 확인
+            const startBtn = document.querySelector('button[onclick="startTetoTest()"]');
+            updateDebug(`시작 버튼: ${startBtn ? '찾음' : '없음'}`);
+        });
+
+        // 전역 함수들
+        function startTetoTest() {
+            updateDebug('startTetoTest() 함수 호출됨');
+            if (window.tetoTestInstance) {
+                updateDebug('tetoTestInstance 존재 - startTest() 호출');
+                try {
+                    window.tetoTestInstance.startTest();
+                    updateDebug('startTest() 실행 완료');
+                } catch (error) {
+                    updateDebug('ERROR: ' + error.message);
+                    console.error(error);
+                }
+            } else {
+                updateDebug('ERROR: tetoTestInstance가 없습니다!');
+            }
+        }
+
+        function restartTetoTest() {
+            updateDebug('restartTetoTest() 호출');
+            if (window.tetoTestInstance) {
+                window.tetoTestInstance.resetTestMethod();
+            }
+        }
+    </script>
+</body>
+</html>

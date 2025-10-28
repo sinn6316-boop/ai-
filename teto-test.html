@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>테토 유형 테스트 - AI 심리분석</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/poomang-style.css">
+        <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/new-style.css">
+    <link rel="stylesheet" href="assets/css/new-navigation.css">
+    
+    <!-- 아이콘 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- 폰트 -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet"> -->
+    <!-- Paperozi 폰트는 CSS 파일에서 @font-face로 로드됩니다 -->
+    
+    <!-- 카카오톡 SDK -->
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.4.0/kakao.min.js"
+            integrity="sha384-mXVrIX2T/Kszp6Z0aEWaA8Nm7J6/ZeWXbL8UpGRjKwWe56Srd/uxxyQK6cNIdHg2"
+            crossorigin="anonymous"></script>
+</head>
+<body class="teto-theme">
+    <!-- 네비게이션 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <!-- 로고 -->
+            <div class="nav-logo">
+                <a href="index.html">
+                    <i class="fas fa-brain"></i>
+                    <span>AI 심리분석</span>
+                </a>
+            </div>
+
+            <!-- 메뉴 토글 버튼 (모바일) -->
+            <button class="nav-toggle" type="button">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+
+            <!-- 네비게이션 메뉴 -->
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>홈</span>
+                </a>
+                <a href="personality.html" class="nav-link">
+                    <i class="fas fa-user"></i>
+                    <span>성격 유형</span>
+                </a>
+                <a href="love.html" class="nav-link">
+                    <i class="fas fa-heart"></i>
+                    <span>연애 스타일</span>
+                </a>
+                <a href="career.html" class="nav-link">
+                    <i class="fas fa-briefcase"></i>
+                    <span>직업 적성</span>
+                </a>
+                <a href="stress.html" class="nav-link">
+                    <i class="fas fa-spa"></i>
+                    <span>스트레스 진단</span>
+                </a>
+                <a href="leadership.html" class="nav-link">
+                    <i class="fas fa-crown"></i>
+                    <span>리더십 유형</span>
+                </a>
+                <a href="teto-test.html" class="nav-link active">
+                    <i class="fas fa-balance-scale"></i>
+                    <span>테토 유형</span>
+                </a>
+            </div>
+
+            <!-- 모바일 드롭다운 메뉴 -->
+            <div class="nav-dropdown">
+                <a href="index.html" class="nav-dropdown-item">
+                    <i class="fas fa-home"></i>
+                    <span>홈</span>
+                </a>
+                <a href="personality.html" class="nav-dropdown-item">
+                    <i class="fas fa-user"></i>
+                    <span>성격 유형</span>
+                </a>
+                <a href="love.html" class="nav-dropdown-item">
+                    <i class="fas fa-heart"></i>
+                    <span>연애 스타일</span>
+                </a>
+                <a href="career.html" class="nav-dropdown-item">
+                    <i class="fas fa-briefcase"></i>
+                    <span>직업 적성</span>
+                </a>
+                <a href="stress.html" class="nav-dropdown-item">
+                    <i class="fas fa-spa"></i>
+                    <span>스트레스 진단</span>
+                </a>
+                <a href="leadership.html" class="nav-dropdown-item">
+                    <i class="fas fa-crown"></i>
+                    <span>리더십 유형</span>
+                </a>
+                <a href="teto-test.html" class="nav-dropdown-item active">
+                    <i class="fas fa-balance-scale"></i>
+                    <span>테토 유형</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 메인 콘텐츠 -->
+    <main class="main-content">
+        <!-- 테스트 인트로 섹션 -->
+        <section id="test-intro" class="test-intro">
+            <div class="container">
+                <div class="intro-content">
+                    <div class="intro-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h1 class="intro-title">테토 유형 테스트</h1>
+                    <p class="intro-subtitle">나는 테토남? 테토녀? 진짜 성향 찾기</p>
+                    <p class="intro-description">
+                        15개의 상황별 질문을 통해 당신의 진짜 테토 성향을 분석합니다.<br>
+                        테토남과 테토녀의 특징을 종합적으로 분석하여<br>
+                        맞춤형 라이프스타일과 행동 가이드를 제시해드립니다.
+                    </p>
+                    
+                    <div class="test-info" style="display: flex; flex-direction: row; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                        <div class="info-item">
+                            <i class="fas fa-clock"></i>
+                            <span>소요시간: 2-3분</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-question-circle"></i>
+                            <span>문항수: 15개</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-users"></i>
+                            <span>신규 테스트</span>
+                        </div>
+                    </div>
+
+                    <button class="start-test-btn" onclick="startTetoTest()">
+                        <i class="fas fa-play"></i>
+                        <span>테스트 시작하기</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 테스트 섹션 -->
+        <section id="test-section" class="test-section" style="display: none;">
+            <div class="test-container">
+                <!-- 진행바 -->
+                <div class="test-header">
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-fill"></div>
+                        </div>
+                        <span class="progress-text" id="progress-text">1 / 15</span>
+                    </div>
+                    <button class="home-btn" onclick="goHome()">
+                        <i class="fas fa-home"></i>
+                    </button>
+                </div>
+
+                <!-- 질문 카드 -->
+                <div class="question-container">
+                    <div class="question-card" id="question-card">
+                        <div class="question-number" id="question-number">Q1</div>
+                        <h2 class="question-title" id="question-title">질문이 여기에 표시됩니다</h2>
+                        <div class="question-image" id="question-image">
+                            <i class="fas fa-balance-scale"></i>
+                        </div>
+                    </div>
+
+                    <div class="answers-container" id="answers-container">
+                        <!-- 답변 옵션들이 동적으로 생성됩니다 -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 결과 섹션 -->
+        <section id="result-section" class="result-section" style="display: none;">
+            <div class="result-container">
+                <!-- 메인 결과 -->
+                <div class="result-main">
+                    <div class="result-card" id="result-card">
+                        <div class="result-icon" id="result-icon">
+                            <i class="fas fa-balance-scale"></i>
+                        </div>
+                        <h2 class="result-title">당신의 테토 유형</h2>
+                        <div class="result-mbti" id="result-type-title">균형형</div>
+                        <h3 class="result-type" id="result-type-name">분석 중...</h3>
+                        <p class="result-description" id="result-description">
+                            결과 설명이 여기에 표시됩니다.
+                        </p>
+                        
+                        <div class="result-stats" id="result-stats">
+                            <!-- 통계가 동적으로 생성됩니다 -->
+                        </div>
+                    </div>
+
+                    <!-- 공유 버튼들 -->
+                    <div class="share-buttons">
+                        <button class="share-btn share-kakao" onclick="shareTetoKakao()">
+                            <i class="fas fa-comment"></i>
+                            <span>카카오톡</span>
+                        </button>
+                        <button class="share-btn share-copy" onclick="copyTetoResult()">
+                            <i class="fas fa-copy"></i>
+                            <span>링크복사</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 다른 테스트 추천 -->
+                <div class="recommended-tests">
+                    <h3><i class="fas fa-magic"></i> 다른 테스트도 해보세요!</h3>
+                    <div class="tests-grid">
+                        <div class="test-item" onclick="location.href='personality.html'">
+                            <i class="fas fa-user"></i>
+                            <h4>성격 유형 테스트</h4>
+                            <p>MBTI 기반 성격 분석</p>
+                        </div>
+                        <div class="test-item" onclick="location.href='love.html'">
+                            <i class="fas fa-heart"></i>
+                            <h4>연애 스타일 테스트</h4>
+                            <p>나의 연애 패턴 분석</p>
+                        </div>
+                        <div class="test-item" onclick="location.href='career.html'">
+                            <i class="fas fa-briefcase"></i>
+                            <h4>직업 적성 테스트</h4>
+                            <p>나에게 맞는 직업 찾기</p>
+                        </div>
+                        <div class="test-item" onclick="location.href='leadership.html'">
+                            <i class="fas fa-crown"></i>
+                            <h4>리더십 유형</h4>
+                            <p>나의 리더십 스타일</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 다시 테스트하기 -->
+                <div class="restart-section">
+                    <button class="restart-btn" onclick="restartTetoTest()">
+                        <i class="fas fa-redo"></i>
+                        <span>다시 테스트하기</span>
+                    </button>
+                    <button class="home-btn-result" onclick="location.href='index.html'">
+                        <i class="fas fa-home"></i>
+                        <span>홈으로 가기</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 로딩 화면 -->
+    <div id="loading" class="loading" style="display: none;">
+        <div class="loading-spinner"></div>
+        <p>결과를 분석중...</p>
+    </div>
+
+    <!-- 토스트 메시지 -->
+    <div id="toast" class="toast">
+        <span id="toast-message"></span>
+    </div>
+
+    <!-- JavaScript 파일들 -->
+    <script src="teto-data.js"></script>
+    <script src="teto-test.js"></script>
+    
+    <script>
+        // 네비게이션 토글 기능 (정적 네비게이션용)
+        document.addEventListener('DOMContentLoaded', function() {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navDropdown = document.querySelector('.nav-dropdown');
+            
+            if (navToggle && navDropdown) {
+                navToggle.addEventListener('click', function() {
+                    navDropdown.classList.toggle('active');
+                    navToggle.classList.toggle('active');
+                });
+                
+                // 메뉴 외부 클릭 시 닫기
+                document.addEventListener('click', function(e) {
+                    if (!e.target.closest('.nav-container')) {
+                        navDropdown.classList.remove('active');
+                        navToggle.classList.remove('active');
+                    }
+                });
+            }
+        });
+    </script>
+    
+    <script>
+        // Kakao SDK 초기화
+        if (typeof Kakao !== 'undefined' && !Kakao.isInitialized()) {
+            // 실제 카카오 앱 키 - 테스트용 공개 키
+            Kakao.init('2c0e2e605aea85abe0c3311b06583571');
+            console.log('Kakao SDK 초기화 완료:', Kakao.isInitialized());
+        }
+
+        // 페이지 로드 시 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('=== DOMContentLoaded 이벤트 발생 ===');
+            
+            // 데이터 확인
+            console.log('tetoQuestions:', typeof tetoQuestions !== 'undefined' ? `존재함 (${tetoQuestions.length}개)` : '없음');
+            console.log('tetoResults:', typeof tetoResults !== 'undefined' ? '존재함' : '없음');
+            console.log('getTetoType:', typeof getTetoType !== 'undefined' ? '존재함' : '없음');
+            console.log('TetoTest 클래스:', typeof TetoTest !== 'undefined' ? '존재함' : '없음');
+            
+            // 테스트 초기화
+            if (typeof TetoTest !== 'undefined') {
+                try {
+                    window.tetoTestInstance = new TetoTest();
+                    console.log('✓ TetoTest 인스턴스 생성 완료');
+                    console.log('  - tetoTestInstance:', window.tetoTestInstance);
+                    console.log('  - startTest 메서드:', typeof window.tetoTestInstance.startTest);
+                } catch (error) {
+                    console.error('✗ TetoTest 인스턴스 생성 실패:', error);
+                }
+            } else {
+                console.error('✗ TetoTest 클래스를 찾을 수 없습니다');
+            }
+            
+            // 버튼 확인
+            const startBtn = document.querySelector('.start-test-btn');
+            console.log('시작 버튼:', startBtn ? '찾음' : '없음');
+            if (startBtn) {
+                console.log('  - onclick 속성:', startBtn.getAttribute('onclick'));
+                console.log('  - startTetoTest 함수:', typeof startTetoTest);
+            }
+            
+            console.log('=== 초기화 완료 ===');
+        });
+    </script>
+</body>
+</html>

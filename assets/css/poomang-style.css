@@ -1,0 +1,328 @@
+/* Paperozi 폰트 정의 */
+@font-face {
+    font-family: 'Paperozi';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-1Thin.woff2') format('woff2');
+    font-weight: 100;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Paperozi';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-2ExtraLight.woff2') format('woff2');
+    font-weight: 200;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Paperozi';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-3Light.woff2') format('woff2');
+    font-weight: 300;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Paperozi';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Paperozi';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-5Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Paperozi';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-6SemiBold.woff2') format('woff2');
+    font-weight: 600;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Paperozi';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Paperozi';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+    font-weight: 800;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Paperozi';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-9Black.woff2') format('woff2');
+    font-weight: 900;
+    font-display: swap;
+}
+
+/* 푸망 스타일 추가 CSS */
+
+/* 홈 테스트 섹션 스타일 */
+.home-other-tests {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.home-other-tests h3 {
+    color: white;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.home-tests-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.home-test-item {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 16px;
+    padding: 1.2rem;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.home-test-item:hover {
+    transform: translateY(-6px);
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 15px 30px rgba(255, 107, 157, 0.3);
+}
+
+.home-test-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.home-test-item:hover::before {
+    left: 100%;
+}
+
+.home-test-item i {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+    display: block;
+    background: linear-gradient(135deg, #FFD54F, #FF8A65);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.home-test-item span {
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
+.home-test-item small {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.8rem;
+    font-weight: 400;
+    display: block;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+    .home-tests-grid {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+    
+    .home-test-item {
+        padding: 1rem;
+    }
+    
+    .home-test-item i {
+        font-size: 1.8rem;
+    }
+    
+    .home-test-item span {
+        font-size: 0.9rem;
+    }
+}
+
+/* 푸망 스타일 버튼 개선 */
+.start-test-btn {
+    background: linear-gradient(135deg, #FF6B9D 0%, #4FC3F7 100%);
+    border: none;
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(255, 107, 157, 0.4);
+    margin: 1.5rem auto;  /* 가운데 정렬을 위해 auto로 변경 */
+    display: flex;
+    align-items: center;
+    justify-content: center;  /* 내부 콘텐츠도 가운데 정렬 */
+    gap: 0.5rem;
+    text-decoration: none;
+    width: fit-content;  /* 버튼 크기를 내용에 맞게 조정 */
+}
+
+.start-test-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(255, 107, 157, 0.5);
+    background: linear-gradient(135deg, #E91E63 0%, #29B6F6 100%);
+}
+
+/* 일일 보너스 스타일 개선 */
+.daily-bonus {
+    background: rgba(255, 213, 79, 0.2);
+    border: 2px solid rgba(255, 213, 79, 0.4);
+    border-radius: 20px;
+    padding: 1rem;
+    margin: 1.5rem 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.daily-bonus:hover {
+    background: rgba(255, 213, 79, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(255, 213, 79, 0.3);
+}
+
+.daily-bonus i {
+    color: #FFD54F;
+    font-size: 1.5rem;
+    margin-right: 0.5rem;
+}
+
+.daily-bonus span {
+    color: white;
+    font-weight: 600;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.daily-bonus small {
+    color: rgba(255, 255, 255, 0.8);
+    display: block;
+    margin-top: 0.3rem;
+}
+
+/* 푸망 스타일 공유 버튼 */
+.share-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.share-btn {
+    background: linear-gradient(135deg, #FF6B9D 0%, #4FC3F7 100%);
+    border: none;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+}
+
+.share-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 107, 157, 0.4);
+}
+
+.share-btn.share-kakao {
+    background: linear-gradient(135deg, #FEE500 0%, #FFEB3B 100%);
+    color: #3C1E1E;
+}
+
+.share-btn.share-kakao:hover {
+    box-shadow: 0 8px 20px rgba(254, 229, 0, 0.4);
+}
+
+.share-btn.share-copy {
+    background: linear-gradient(135deg, #4FC3F7 0%, #29B6F6 100%);
+}
+
+.share-btn.share-copy:hover {
+    box-shadow: 0 8px 20px rgba(79, 195, 247, 0.4);
+}
+
+/* 결과 섹션 제목 스타일 */
+.result-content h2 {
+    color: #FF6B9D;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.result-content .personality-type {
+    background: linear-gradient(135deg, #FF6B9D, #4FC3F7);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+    font-size: 2.2rem;
+}
+
+/* 오늘의 조언 섹션 푸망 스타일 */
+.today-advice h3,
+.similar-types h3,
+.compatibility-section h3,
+.recommended-tests h3 {
+    color: #FF6B9D;
+    font-weight: 600;
+}
+
+.today-advice h3 i,
+.similar-types h3 i,
+.compatibility-section h3 i,
+.recommended-tests h3 i {
+    background: linear-gradient(135deg, #FFD54F, #FF8A65);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* 호환성 버튼 푸망 스타일 */
+.compatibility-btn {
+    background: linear-gradient(135deg, #FF6B9D 0%, #4FC3F7 100%) !important;
+    border-radius: 25px !important;
+    font-weight: 600 !important;
+    padding: 1rem 2rem !important;
+    box-shadow: 0 6px 20px rgba(255, 107, 157, 0.3) !important;
+}
+
+.compatibility-btn:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 10px 25px rgba(255, 107, 157, 0.4) !important;
+}
